@@ -1,0 +1,71 @@
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char text[500];
+    char english[] = "ETAOINSHRDLCUMWFGYPBVKJXQZ";
+    char map[26];
+    int freq[26], used[26];
+    int i, j, max, index;
+    char ch;
+
+    for (i = 0; i < 26; i++)
+    {
+        freq[i] = 0;
+        used[i] = 0;
+        map[i] = '?';
+    }
+
+    printf("Enter ciphertext: ");
+    fgets(text, sizeof(text), stdin);
+
+    for (i = 0; text[i] != '\0'; i++)
+    {
+        ch = text[i];
+
+        if (ch >= 'A' && ch <= 'Z')
+            freq[ch - 'A']++;
+        else if (ch >= 'a' && ch <= 'z')
+            freq[ch - 'a']++;
+    }
+
+    for (i = 0; i < 26; i++)
+    {
+        max = -1;
+        index = -1;
+
+        for (j = 0; j < 26; j++)
+        {
+            if (!used[j] && freq[j] > max)
+            {
+                max = freq[j];
+                index = j;
+            }
+        }
+
+        if (index != -1)
+        {
+            used[index] = 1;
+            map[index] = english[i];
+        }
+    }
+
+    printf("Possible plaintext: ");
+
+    for (i = 0; text[i] != '\0'; i++)
+    {
+        ch = text[i];
+
+        if (ch >= 'A' && ch <= 'Z')
+            printf("%c", map[ch - 'A']);
+        else if (ch >= 'a' && ch <= 'z')
+            printf("%c", map[ch - 'a'] + 32);
+        else
+            printf("%c", ch);
+    }
+
+    printf("\n");
+    return 0;
+}

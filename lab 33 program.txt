@@ -1,0 +1,29 @@
+
+#include <stdio.h>
+
+int main() {
+    unsigned char p[8], key[8], c[8], d[8];
+    int i;
+
+    printf("Enter 8 characters: ");
+    scanf("%8s", p);
+
+    printf("Enter 8-character key: ");
+    scanf("%8s", key);
+
+    for (i = 0; i < 8; i++)
+        c[i] = p[i] ^ key[i];
+
+    printf("Encrypted: ");
+    for (i = 0; i < 8; i++)
+        printf("%02X", c[i]);
+
+    for (i = 0; i < 8; i++)
+        d[i] = c[i] ^ key[i];
+
+    printf("\nDecrypted: ");
+    for (i = 0; i < 8; i++)
+        printf("%c", d[i]);
+
+    return 0;
+}

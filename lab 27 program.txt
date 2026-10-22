@@ -1,0 +1,23 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int i, j, m, e = 3, n = 55, c;
+    char text[] = "HELLO";
+
+    printf("Encrypted values: ");
+
+    for (i = 0; text[i] != '\0'; i++)
+    {
+        m = text[i] - 'A';
+        c = 1;
+
+        for (j = 0; j < e; j++)
+            c = (c * m) % n;
+
+        printf("%d ", c);
+    }
+
+    return 0;
+}

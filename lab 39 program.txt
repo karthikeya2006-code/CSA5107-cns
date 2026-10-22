@@ -1,0 +1,36 @@
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char text[500];
+    int shift, i;
+    char ch;
+
+    printf("Enter ciphertext: ");
+    fgets(text, sizeof(text), stdin);
+
+    printf("\nPossible plaintexts:\n");
+
+    for (shift = 0; shift < 26; shift++)
+    {
+        printf("Shift %2d: ", shift);
+
+        for (i = 0; text[i] != '\0'; i++)
+        {
+            ch = text[i];
+
+            if (ch >= 'A' && ch <= 'Z')
+                ch = (ch - 'A' - shift + 26) % 26 + 'A';
+            else if (ch >= 'a' && ch <= 'z')
+                ch = (ch - 'a' - shift + 26) % 26 + 'a';
+
+            printf("%c", ch);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}

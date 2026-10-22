@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int main() {
+    int p[4], ecb[4], cbc[4], cfb[4];
+    int key = 7, iv = 3, prev;
+
+    printf("Enter 4 plaintext numbers (0-255): ");
+    for (int i = 0; i < 4; i++)
+        scanf("%d", &p[i]);
+
+    prev = iv;
+    for (int i = 0; i < 4; i++) {
+        ecb[i] = p[i] ^ key;
+        cbc[i] = p[i] ^ prev ^ key;
+        prev = cbc[i];
+    }
+
+    prev = iv;
+    for (int i = 0; i < 4; i++) {
+        cfb[i] = p[i] ^ (prev ^ key);
+        prev = cfb[i];
+    }
+
+    printf("ECB: ");
+    for (int i = 0; i < 4; i++) printf("%d ", ecb[i]);
+
+    printf("\nCBC: ");
+    for (int i = 0; i < 4; i++) printf("%d ", cbc[i]);
+
+    printf("\nCFB: ");
+    for (int i = 0; i < 4; i++) printf("%d ", cfb[i]);
+
+    return 0;
+}

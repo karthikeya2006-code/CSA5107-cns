@@ -1,0 +1,22 @@
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char text[] = "HELLO123";
+    int key = 25, iv = 0;
+    int i, c;
+
+    printf("CBC Encryption Output:\n");
+
+    for (i = 0; i < 8; i++)
+    {
+        c = text[i] ^ key ^ iv;
+        printf("%02X ", c);
+        iv = c;
+    }
+
+    printf("\n");
+    return 0;
+}

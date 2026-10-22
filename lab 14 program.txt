@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main()
+{
+    char p[] = "SENDMOREMONEY";
+    char q[] = "CASHNOTNEEDED";
+    int k[] = {9,0,1,7,23,15,21,14,11,11,2,8,9};
+    int i, c, key;
+
+    printf("Ciphertext: ");
+
+    for (i = 0; p[i] != '\0'; i++)
+    {
+        c = (p[i] - 'A' + k[i]) % 26;
+        printf("%c", c + 'A');
+    }
+
+    printf("\nNew Key: ");
+
+    for (i = 0; q[i] != '\0'; i++)
+    {
+        c = (p[i] - 'A' + k[i]) % 26;
+        key = (q[i] - 'A' - c + 26) % 26;
+        printf("%d ", key);
+    }
+
+    return 0;
+}

@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char text[100];
+    int i, n;
+
+    printf("Enter plaintext: ");
+    fgets(text, sizeof(text), stdin);
+
+    n = strlen(text);
+    if (n > 0 && text[n - 1] == '\n')
+        n--;
+
+    text[n++] = 0x80;  /* 1 bit followed by zero bits */
+
+    while (n % 8 != 0)
+        text[n++] = 0;
+
+    printf("\nPadded plaintext (hex): ");
+    for (i = 0; i < n; i++)
+        printf("%02X ", (unsigned char)text[i]);
+
+    printf("\nECB, CBC and CFB require complete blocks or segments.\n");
+    return 0;
+}

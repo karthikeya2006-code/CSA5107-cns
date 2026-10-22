@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main()
+{
+    char cipher[200];
+    int i, c, p;
+
+    printf("Enter ciphertext: ");
+    scanf(" %[^\n]", cipher);
+
+    printf("Plaintext: ");
+
+    for (i = 0; cipher[i] != '\0'; i++)
+    {
+        if (cipher[i] >= 'A' && cipher[i] <= 'Z')
+        {
+            c = cipher[i] - 'A';
+            p = (9 * (c - 15)) % 26;
+
+            if (p < 0)
+                p = p + 26;
+
+            printf("%c", p + 'A');
+        }
+        else
+        {
+            printf("%c", cipher[i]);
+        }
+    }
+
+    return 0;
+}

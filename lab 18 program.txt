@@ -1,0 +1,26 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int C[28], D[28], i;
+
+    printf("Enter 28 bits for C:\n");
+    for (i = 0; i < 28; i++)
+        scanf("%d", &C[i]);
+
+    printf("Enter 28 bits for D:\n");
+    for (i = 0; i < 28; i++)
+        scanf("%d", &D[i]);
+
+    printf("\nSubkey (48 bits):\n");
+
+    for (i = 0; i < 24; i++)
+        printf("%d", C[i]);
+
+    for (i = 0; i < 24; i++)
+        printf("%d", D[i]);
+
+    printf("\n");
+    return 0;
+}

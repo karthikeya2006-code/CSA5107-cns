@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    double keys, uniqueKeys;
+
+    /* Part a: 25! possible arrangements */
+    keys = tgamma(26);
+
+    /* Part b: effectively unique keys */
+    uniqueKeys = keys / (25 * 25);
+
+    printf("Possible Playfair keys = %.0f\n", keys);
+    printf("Approximate power of 2 = 2^%.2f\n", log(keys) / log(2));
+
+    printf("\nEffectively unique keys = %.0f\n", uniqueKeys);
+    printf("Approximate power of 2 = 2^%.2f\n",
+           log(uniqueKeys) / log(2));
+
+    return 0;
+}

@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main()
+{
+    char c[200];
+    int i, shift;
+
+    printf("Enter ciphertext: ");
+    fgets(c, 200, stdin);
+
+    printf("\nPossible plaintexts:\n");
+
+    for (shift = 0; shift < 10; shift++)
+    {
+        printf("%d. ", shift + 1);
+
+        for (i = 0; c[i] != '\0'; i++)
+        {
+            if (c[i] >= 'A' && c[i] <= 'Z')
+                printf("%c", (c[i] - 'A' - shift + 26) % 26 + 'A');
+            else if (c[i] >= 'a' && c[i] <= 'z')
+                printf("%c", (c[i] - 'a' - shift + 26) % 26 + 'a');
+            else
+                printf("%c", c[i]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}

@@ -1,0 +1,169 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+char matrix[5][5];
+
+void createMatrix(char key[])
+{
+    char used[26] = {0};
+    char alphabet[] = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+    int i, k;
+    char ch;
+
+    k = 0;
+
+    /* Add key letters */
+    for (i = 0; key[i] != '\0'; i++)
+    {
+        ch = toupper(key[i]);
+
+        if (ch == 'J')
+            ch = 'I';
+
+        if (ch >= 'A' && ch <= 'Z' && used[ch - 'A'] == 0)
+        {
+            matrix[k / 5][k % 5] = ch;
+            used[ch - 'A'] = 1;
+            k++;
+        }
+    }
+
+    /* Add remaining alphabet */
+    for (i = 0; alphabet[i] != '\0'; i++)
+    {
+        ch = alphabet[i];
+
+        if (used[ch - 'A'] == 0)
+        {
+            matrix[k / 5][k % 5] = ch;
+            used[ch - 'A'] = 1;
+            k++;
+        }
+    }
+}
+
+void findPosition(char ch, int *row, int *col)
+{
+    int i, j;
+
+    if (ch == 'J')
+        ch = 'I';
+
+    for (i = 0; i < 5; i++)
+    {
+        for (j = 0; j < 5; j++)
+        {
+            if (matrix[i][j] == ch)
+            {
+                *row = i;
+                *col = j;
+                return;
+            }
+        }
+    }
+}
+
+int main()
+{
+    char key[50];
+    char plaintext[200];
+    char text[200];
+
+    int i, j;
+    int n;
+    int r1, c1, r2, c2;
+    char ch;
+
+    printf("Enter key: ");
+    scanf("%s", key);
+
+    printf("Enter plaintext: ");
+    scanf("%s", plaintext);
+
+    createMatrix(key);
+
+    printf("\nPlayfair Matrix:\n");
+
+    for (i = 0; i < 5; i++)
+    {
+        for (j = 0; j < 5; j++)
+        {
+            printf("%c ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    /* Convert plaintext */
+    n = 0;
+
+    for (i = 0; plaintext[i] != '\0'; i++)
+    {
+        ch = toupper(plaintext[i]);
+
+        if (ch == 'J')
+            ch = 'I';
+
+        text[n] = ch;
+        n++;
+    }
+
+    text[n] = '\0';
+
+    /* Add X between repeated letters */
+    for (i = 0; i < n - 1; i = i + 2)
+    {
+        if (text[i] == text[i + 1])
+        {
+            for (j = n; j > i + 1; j--)
+            {
+                text[j] = text[j - 1];
+            }
+
+            text[i + 1] = 'X';
+            n++;
+        }
+    }
+
+    /* Add X if length is odd */
+    if (n % 2 != 0)
+    {
+        text[n] = 'X';
+        n++;
+        text[n] = '\0';
+    }
+
+    printf("\nEncrypted text: ");
+
+    /* Encrypt pairs */
+    for (i = 0; i < n; i = i + 2)
+    {
+        findPosition(text[i], &r1, &c1);
+        findPosition(text[i + 1], &r2, &c2);
+
+        /* Same row */
+        if (r1 == r2)
+        {
+            printf("%c", matrix[r1][(c1 + 1) % 5]);
+            printf("%c", matrix[r2][(c2 + 1) % 5]);
+        }
+
+        /* Same column */
+        else if (c1 == c2)
+        {
+            printf("%c", matrix[(r1 + 1) % 5][c1]);
+            printf("%c", matrix[(r2 + 1) % 5][c2]);
+        }
+
+        /* Rectangle rule */
+        else
+        {
+            printf("%c", matrix[r1][c2]);
+            printf("%c", matrix[r2][c1]);
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}

@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main() {
+    int m = 7, key = 11;
+    int k1 = 3, k2 = 5;
+
+    int dsa1 = (m * key + k1) % 97;
+    int dsa2 = (m * key + k2) % 97;
+
+    int rsa1 = (m * key) % 97;
+    int rsa2 = (m * key) % 97;
+
+    printf("DSA signature 1 = %d\n", dsa1);
+    printf("DSA signature 2 = %d\n", dsa2);
+    printf("RSA signature 1 = %d\n", rsa1);
+    printf("RSA signature 2 = %d\n", rsa2);
+
+    return 0;
+}

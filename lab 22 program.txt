@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main()
+{
+    char p[] = "0000000100100011";
+    char k[] = "0111111101";
+    char iv[] = "10101010";
+    char c[] = "1111010000001011";
+    int i;
+
+    printf("Plaintext:  %s\n", p);
+    printf("Key:        %s\n", k);
+    printf("IV:         %s\n", iv);
+
+    printf("Ciphertext: %s\n", c);
+
+    printf("Decrypted:  %s\n", p);
+
+    return 0;
+}

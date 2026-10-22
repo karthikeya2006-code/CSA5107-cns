@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main()
+{
+    int rate = 1024;
+    int capacity = 576;
+    int lane = 64;
+    int rateLanes, capacityLanes, blocks;
+
+    rateLanes = rate / lane;
+    capacityLanes = capacity / lane;
+
+    blocks = 1;
+
+    printf("Rate lanes: %d\n", rateLanes);
+    printf("Capacity lanes: %d\n", capacityLanes);
+
+    printf("After %d message block, ", blocks);
+    printf("%d capacity lanes remain zero.\n", capacityLanes);
+
+    printf("After 2 message blocks, all capacity lanes ");
+    printf("can contain nonzero bits.\n");
+
+    return 0;
+}

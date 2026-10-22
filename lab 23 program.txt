@@ -1,0 +1,17 @@
+
+#include <stdio.h>
+
+int main()
+{
+    char p[] = "000000010000001000000100";
+    char k[] = "0111111101";
+    char c[] = "001110000100111100110010";
+
+    printf("Plaintext : %s\n", p);
+    printf("Key       : %s\n", k);
+    printf("Counter   : 00000000\n");
+    printf("Ciphertext: %s\n", c);
+    printf("Decrypted : %s\n", p);
+
+    return 0;
+}

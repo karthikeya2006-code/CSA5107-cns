@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{
+    char text[] = "MEET ME AT THE USUAL PLACE AT TEN RATHER THAN EIGHT OCLOCK";
+    int key[2][2] = {{9, 4}, {5, 7}};
+    int i, a, b, c1, c2;
+
+    printf("Plaintext: %s\n", text);
+
+    printf("Ciphertext: ");
+
+    for (i = 0; text[i] != '\0'; i++)
+    {
+        if (isalpha(text[i]))
+        {
+            a = toupper(text[i]) - 'A';
+
+            i++;
+
+            while (text[i] != '\0' && !isalpha(text[i]))
+                i++;
+
+            if (text[i] == '\0')
+                b = 'X' - 'A';
+            else
+                b = toupper(text[i]) - 'A';
+
+            c1 = (key[0][0] * a + key[0][1] * b) % 26;
+            c2 = (key[1][0] * a + key[1][1] * b) % 26;
+
+            printf("%c%c", c1 + 'A', c2 + 'A');
+        }
+    }
+
+    printf("\n");
+
+    return 0;
+}

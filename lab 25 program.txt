@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main()
+{
+    int n, m, a, b, r;
+
+    printf("Enter n: ");
+    scanf("%d", &n);
+
+    printf("Enter plaintext block: ");
+    scanf("%d", &m);
+
+    a = m;
+    b = n;
+
+    while (b != 0)
+    {
+        r = a % b;
+        a = b;
+        b = r;
+    }
+
+    printf("GCD = %d\n", a);
+
+    if (a > 1 && a < n)
+        printf("RSA is compromised. A factor of n is found.\n");
+    else
+        printf("No nontrivial factor found.\n");
+
+    return 0;
+}
